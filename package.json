@@ -8,8 +8,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "mongoose": "^5.9.18",
     "next": "9.4.4",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "swr": "^0.2.2"
   }
 }
