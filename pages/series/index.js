@@ -1,6 +1,6 @@
-import Panel from '../../components/Panel';
+import Panel from "../../components/Panel";
 
-import catalogApi from '../../services/catalog-api';
+import getCatalog from "../../services/catalog-api";
 
 const Index = ({ series }) => {
   return (
@@ -8,15 +8,15 @@ const Index = ({ series }) => {
       <h2>Popcorn Time Series Catalog</h2>
       <p>search</p>
       <div>
-        <Panel data={series} />
+        <Panel category="series" data={series} />
       </div>
     </div>
   );
 };
 
 export async function getServerSideProps() {
-  const response = await catalogApi.get('/series?page=1');
-  const series = response.data;
+  const catalog = await getCatalog();
+  const series = await catalog.getSeries();
   return { props: { series } };
 }
 

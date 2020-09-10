@@ -1,8 +1,10 @@
-import Head from 'next/head';
+import Head from "next/head";
 
-import TrendingPanel from '../components/TrendingPanel';
+import styles from "./index.module.css";
 
-import catalogApi from '../services/catalog-api';
+import TrendingPanel from "../components/TrendingPanel";
+
+import getCatalog from "../services/catalog-api";
 
 export default function Home({ movies, series, animes }) {
   return (
@@ -16,16 +18,16 @@ export default function Home({ movies, series, animes }) {
         <h1>Welcome to Popcorn Time Catalog!</h1>
         <h2>See if what you want is there, before opening the app</h2>
 
-        <section>
-          <h3>Top 10 trending movies</h3>
+        <section className={styles.trendingSection}>
+          <h3>Trending movies</h3>
           <TrendingPanel data={movies} category="movies" />
         </section>
-        <section>
-          <h3>Top 10 trending series</h3>
+        <section className={styles.trendingSection}>
+          <h3>Trending series</h3>
           <TrendingPanel data={series} category="series" />
         </section>
-        <section>
-          <h3>Top 10 trending animes</h3>
+        <section className={styles.trendingSection}>
+          <h3>Trending animes</h3>
           <TrendingPanel data={animes} category="animes" />
         </section>
       </main>
@@ -34,16 +36,21 @@ export default function Home({ movies, series, animes }) {
 }
 
 export async function getServerSideProps() {
+  const catalog = await getCatalog();
   const response = await Promise.all([
-    catalogApi.get('/movies?sort=trending'),
-    catalogApi.get('/series?sort=trending'),
-    catalogApi.get('/animes?sort=trending'),
+    catalog.getMovies(),
+    catalog.getSeries(),
+    catalog.getAnimes(),
   ]);
-  const movies = response[0].data.slice(0, 10);
-  const series = response[1].data.slice(0, 10);
-  const animes = response[2].data.slice(0, 10);
+  const movies = response[0].slice(0, 16);
+  const series = response[1].slice(0, 16);
+  const animes = response[2].slice(0, 16);
 
   return {
-    props: { movies, series, animes },
+    props: {
+      movies,
+      series,
+      animes,
+    },
   };
 }

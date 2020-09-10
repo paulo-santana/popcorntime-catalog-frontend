@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.stars {
+  font-size: 14px;
+  word-wrap: nowrap;
+}
+
+.literalRating {
+  font-size: 14px;
+}
+
+.starFull,
+.starHalf {
+  z-index: 2;
+  color: #f4de20;
+}
+.starEmpty {
+  color: #888888;
+}
+
+.starHalfContainer {
+  position: relative;
+}
+
+.starHalfContainer .starHalf {
+  position: absolute;
+  left: 0;
+}
+
+.literalRating {
+  font-weight: bold;
+}

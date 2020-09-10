@@ -3,11 +3,10 @@ import getCatalog from "../../services/catalog-api";
 export async function getStaticProps({ params }) {
   try {
     const catalog = await getCatalog();
-
     const { slug } = params;
-    const movie = await catalog.getMovieData(slug);
+    const series = await catalog.getSeriesData(slug);
     return {
-      props: { movie },
+      props: { series },
     };
   } catch (error) {
     console.error(error);
@@ -17,7 +16,7 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
   const catalog = await getCatalog();
-  const slugs = await catalog.getPaths("movies");
+  const slugs = await catalog.getPaths("series");
   const paths = slugs.map((slug) => ({
     params: { slug },
   }));
@@ -27,27 +26,27 @@ export async function getStaticPaths() {
   };
 }
 
-export default function ({ movie }) {
-  if (!movie) {
-    return <div>foda</div>;
+export default function ({ series }) {
+  if (!series) {
+    return <div>mais foda ainda</div>;
   }
   return (
     <div>
       <div>
-        <img src={movie.images.poster} />
+        <img src={series.images.poster} />
       </div>
       <div>
         <header>
-          <h1>{movie.title}</h1>
-          <div>{movie.year}</div>
-          <div>{movie.runtime} min</div>
-          <div>{movie.genres.join(" / ")}</div>
+          <h1>{series.title}</h1>
+          <div>{series.year}</div>
+          <div>{series.runtime} min</div>
+          <div>{series.genres.join(" / ")}</div>
           <div>
-            <a href={`https://www.imdb.com/title/${movie.imdb_id}/`}>
+            <a href={`https://www.imdb.com/title/${series.imdb_id}/`}>
               <img src="/imdb.png" alt="IMDb icon" title="Visit IMDb page" />
             </a>
           </div>
-          <div>{movie.rating.percentage / 10}/10</div>
+          <div>{series.rating.percentage / 10}/10</div>
         </header>
       </div>
     </div>

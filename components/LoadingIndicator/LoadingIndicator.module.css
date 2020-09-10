@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 36px;
+  height: 36px;
+}
+
+.container div {
+  width: 8px;
+  height: 8px;
+  margin: 2px;
+  background-color: yellow;
+  border-radius: 20%;
+  animation: blink ease infinite;
+}
+
+@keyframes blink {
+  30% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+}

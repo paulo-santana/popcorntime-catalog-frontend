@@ -1,0 +1,21 @@
+* {
+  outline: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #fff;
+  background-color: #070707;
+}
+
+a {
+  text-decoration: none;
+  color: #ddd;
+}
+
+:root {
+  --animation-delay: 1.5s;
+}
