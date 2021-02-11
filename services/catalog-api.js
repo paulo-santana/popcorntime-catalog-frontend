@@ -81,13 +81,13 @@ const getCatalog = async () => {
 
     if (newAnimes.length > 0) {
       console.log(`saving ${newAnimes.length} animes right now`);
-      const jikanApi = getJikanApi();
+     // const jikanApi = getJikanApi();
 
-      for (let i = 0; i < newAnimes.length; i++) {
-        const animeData = await jikanApi.getAnimeData(newAnimes[i].mal_id);
-        newAnimes[i].poster = animeData.image_url;
-        delete newAnimes[i].mal_id;
-      }
+     // for (let i = 0; i < newAnimes.length; i++) {
+     //   const animeData = await jikanApi.getAnimeData(newAnimes[i].mal_id);
+     //   newAnimes[i].poster = animeData.image_url;
+     //   delete newAnimes[i].mal_id;
+     // }
 
       Animes.insertMany(newAnimes);
       console.log("done");
@@ -197,7 +197,7 @@ const getCatalog = async () => {
     const Anime = mongo.db().collection("animes");
     const animeData = await Anime.findOne({ slug });
     const anime = await animesApi.getAnimeData(animeData._id);
-    anime.images.poster = animeData.poster;
+    //anime.images.poster = animeData.poster;
     return anime;
   };
 
