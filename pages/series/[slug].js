@@ -28,7 +28,7 @@ export async function getStaticPaths() {
 
 export default function ({ series }) {
   if (!series) {
-    return <div>mais foda ainda</div>;
+    return <div>Carregando...</div>;
   }
   return (
     <div>

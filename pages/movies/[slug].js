@@ -29,7 +29,7 @@ export async function getStaticPaths() {
 
 export default function ({ movie }) {
   if (!movie) {
-    return <div>foda</div>;
+    return <div>Carregando...</div>;
   }
   return (
     <div>
